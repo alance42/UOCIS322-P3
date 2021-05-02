@@ -84,14 +84,14 @@
          <h2>You found </h2>
          <p id="results"></p>
 
-         <p class="message"></p>
+         <p id="message"></p>
 
       </div>
         <script>
             // Suppress normal form submission
-            //$("#entry").submit( function(event) {
-            //   event.preventDefault();
-            //  });
+            $("#entry").submit( function(event) {
+               event.preventDefault();
+              });
 
             // On each keystroke, ask the server whether the current
             // word is long enough.
@@ -114,31 +114,32 @@
                // upper and lower case comes from state of shift key + key code,
                // so ignoring the shift key we get only the upper case letters.
 
-               if (! "abcdefghijklmnopqrstuvqxyz".includes(letter)) { return }
+               if (! "ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(letter)) { return }
 
                $.getJSON( "/_check", { text: txt },
                         function(data) {
                           	var result = data.result;
                           	var in_jumble = result.in_jumble;
-   							var matched = result.matched;
-    						var already_found = result.already_found;
-    						var jumble = result.jumble;
-    						var text = result.guess;
+   							            var matched = result.matched;
+                						var already_found = result.already_found;
+                						var jumble = result.jumble;
+                						var text = result.guess;
 
-    						if(already_found){
-    							$("message").html("You already found" + text);
-    						}
-    						else if(matched && in_jumble){
-    							$("#results").append(text + " ");
-    						}
-    						else {
-    							if(!matched){
-    								$("message").html(text + "isn't in the list of words");
-    							}
-    							else if(!in_jumble){
-    								$("message").html(text + " can\'t be made from the letters " + jumble);
-    							}
-    						}
+
+                						if(already_found){
+                							$("#message").html("You already found " + text);
+                						}
+                						else if(matched && in_jumble){
+                							$("#results").append(text + " ");
+                						}
+                						else {
+                							if(!matched){
+                								$("#message").html(text + " isn't in the list of words");
+                							}
+                							else if(!in_jumble){
+                								$("#message").html(text + " can\'t be made from the letters " + jumble);
+                							}
+                						}
                             
                         }
                        );

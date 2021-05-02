@@ -88,25 +88,16 @@ def check():
 
 
     # The data we need, from form and from cookie
-    #text = flask.request.form["attempt"]
     textList = request.args.get("text", type=str).strip().split()
     text = textList[-1]
     jumble = flask.session["jumble"]
 
-    matches = textList[:1]  # Default to empty list
-    already_found = False
-    # Is it good?
-    in_jumble = LetterBag(jumble).contains(text)
-    matched = WORDS.has(text)
-
-    
-    if text in matches:
-        already_found = True
+    matches = textList[:-1]
 
     rslt = {
-    "in_jumble": in_jumble,
-    "matched": matched,
-    "already_found": already_found,
+    "in_jumble": LetterBag(jumble).contains(text),
+    "matched": WORDS.has(text),
+    "already_found": text in matches,
     "jumble": jumble,
     "guess": text
     }
