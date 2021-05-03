@@ -81,7 +81,7 @@
             </div>
          </div>
          <br />
-         <h2>You found </h2>
+         <h2 id="found"></h2>
          <p id="results"></p>
 
          <p id="message"></p>
@@ -135,6 +135,7 @@
                 						}
                 						else if(matched && in_jumble){
                               $("#attempt").val("");
+                              $("#found").html("You found:")
                 							$("#results").append(guess + " ");
                 						}
                 						else {
