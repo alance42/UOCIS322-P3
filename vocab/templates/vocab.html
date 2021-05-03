@@ -123,21 +123,26 @@
    							            var matched = result.matched;
                 						var already_found = result.already_found;
                 						var jumble = result.jumble;
-                						var text = result.guess;
+                						var guess = result.guess;
+                            var success = result.success;
 
 
-                						if(already_found){
-                							$("#message").html("You already found " + text);
+                            if(success){
+                              window.location.replace("/success");
+                            }
+                						else if(already_found){
+                							$("#message").html("You already found " + guess);
                 						}
                 						else if(matched && in_jumble){
-                							$("#results").append(text + " ");
+                              $("#attempt").val("");
+                							$("#results").append(guess + " ");
                 						}
                 						else {
                 							if(!matched){
-                								$("#message").html(text + " isn't in the list of words");
+                								$("#message").html(guess + " isn't in the list of words");
                 							}
                 							else if(!in_jumble){
-                								$("#message").html(text + " can\'t be made from the letters " + jumble);
+                								$("#message").html(guess + " can\'t be made from the letters " + jumble);
                 							}
                 						}
                             

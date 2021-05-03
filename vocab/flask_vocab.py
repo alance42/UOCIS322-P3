@@ -99,14 +99,12 @@ def check():
     "matched": WORDS.has(text),
     "already_found": text in matches,
     "jumble": jumble,
-    "guess": text
+    "guess": text,
+    "success": len(matches) >= flask.session["target_count"]
     }
 
     # Choose page:  Solved enough, or keep going?
-    if len(matches) >= flask.session["target_count"]:
-    	return flask.redirect(flask.url_for("success"))
-    else:
-        return flask.jsonify(result=rslt)
+    return flask.jsonify(result=rslt)
     
 
 
