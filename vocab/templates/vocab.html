@@ -120,33 +120,32 @@
                         function(data) {
                           	var result = data.result;
                           	var in_jumble = result.in_jumble;
-   							            var matched = result.matched;
-                						var already_found = result.already_found;
-                						var jumble = result.jumble;
-                						var guess = result.guess;
+   							var matched = result.matched;
+                			var already_found = result.already_found;
+                			var jumble = result.jumble;
+                			var guess = result.guess;
                             var success = result.success;
 
 
                             if(success){
                               window.location.replace("/success");
                             }
-                						else if(already_found){
-                							$("#message").html("You already found " + guess);
-                						}
-                						else if(matched && in_jumble){
-                              $("#attempt").val("");
-                              $("#found").html("You found:")
-                							$("#results").append(guess + " ");
-                						}
-                						else {
-                							if(!matched){
-                								$("#message").html(guess + " isn't in the list of words");
-                							}
-                							else if(!in_jumble){
-                								$("#message").html(guess + " can\'t be made from the letters " + jumble);
-                							}
-                						}
-                            
+                			else if(already_found){
+                				$("#message").html("You already found " + guess);
+                			}
+                			else if(matched && in_jumble){
+                              	$("#attempt").val("");
+                              	$("#found").html("You found:")
+                				$("#results").append(guess + " ");
+                			}
+                			else {
+                				if(!matched){
+                					$("#message").html(guess + " isn't in the list of words");
+                				}
+                				else if(!in_jumble){
+                					$("#message").html(guess + " can\'t be made from the letters " + jumble);
+                				}
+                			}
                         }
                        );
                });

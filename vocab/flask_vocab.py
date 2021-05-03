@@ -87,13 +87,19 @@ def check():
     """
 
 
-    # The data we need, from form and from cookie
+    # The data we need, from the frontend seperated into a list by spaces
     textList = request.args.get("text", type=str).strip().split()
+
+    #get current guess
     text = textList[-1]
+
+    #Get the current jumble from the Jinja in the frontend
     jumble = flask.session["jumble"]
 
+    #Get all of the previous matches excluding our current one
     matches = textList[:-1]
 
+    #setup dictionary data to send to frontend
     rslt = {
     "in_jumble": LetterBag(jumble).contains(text),
     "matched": WORDS.has(text),
@@ -103,7 +109,7 @@ def check():
     "success": len(matches) >= flask.session["target_count"]
     }
 
-    # Choose page:  Solved enough, or keep going?
+    # Return JSON to frontend
     return flask.jsonify(result=rslt)
     
 
